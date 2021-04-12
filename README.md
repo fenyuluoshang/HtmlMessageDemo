@@ -2,7 +2,7 @@
 
 在日常开发时候我们可能偶尔会有需要在用户打开的多个页面之间传递消息，譬如实现购物车、实现同步登录状态等，或是实现指令操作、通过下达指令来让其他页面配合完成操作
 
-> 本文内容可能不能在IE浏览器中得到有效支持，完整示例代码可以查看[HtmlMessageDemo](https://github.com/fenyuluoshang/HtmlMessageDemo)，或查看线上demo  [域名1-页面](https://blog.fenyu.club/messageDemo/)  [域名2-页面](https://www.fenyu.club/messageDemo/)
+> 本文内容可能不能在IE浏览器中得到有效支持，完整示例代码可以查看[HtmlMessageDemo](https://github.com/fenyuluoshang/HtmlMessageDemo)，或查看线上demo  [域名1-页面](https://blog.fenyu.club/messageDemo/)  [域名2-页面](https://fenyu.club/messageDemo/)
 
 ## 不受同源限制的消息传递
 
