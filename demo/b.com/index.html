@@ -18,7 +18,8 @@
     </div>
     <script>
       const hash = Date.now() + ''
-      const baseUrl = 'http://a.com/shaderDom.html#' + hash
+      const aBase = 'http://a.com'
+      const baseUrl = aBase + '/shaderDom.html#' + hash
 
       window.addEventListener('message', (ev) => {
         if (ev.data && ev.data.from === 'shader-dom' && ev.data.hash === hash) {
@@ -57,7 +58,7 @@
             id,
             message,
           },
-        })
+        }, aBase)
       })
     </script>
   </body>

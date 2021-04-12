@@ -8,6 +8,7 @@
   </head>
   <body>
     <script>
+      const aBase = 'http://a.com'
       const hash = location.hash.substring(1)
       const baseUrl = '.'
       const worker = new SharedWorker(baseUrl + '/shared-worker.js')
@@ -23,7 +24,7 @@
           hash: hash,
         })
         console.log(data)
-        window.parent.postMessage(data)
+        window.parent.postMessage(data, aBase)
       }
       worker.port.start()
     </script>
