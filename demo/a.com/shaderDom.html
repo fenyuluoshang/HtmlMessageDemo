@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>用于消息传递的页面</title>
+  </head>
+  <body>
+    <script>
+      const hash = location.hash.substring(1)
+      const baseUrl = '.'
+      const worker = new SharedWorker(baseUrl + '/shared-worker.js')
+      window.addEventListener('message', (ev) => {
+        if (ev.data && ev.data.from === 'page' && ev.data.hash === hash) {
+          console.log(ev)
+          worker.port.postMessage(ev.data)
+        }
+      })
+      worker.port.onmessage = (ev) => {
+        let data = Object.assign(ev.data, {
+          from: 'shader-dom',
+          hash: hash,
+        })
+        console.log(data)
+        window.parent.postMessage(data)
+      }
+      worker.port.start()
+    </script>
+  </body>
+</html>

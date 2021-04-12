@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>消息控制</title>
+</head>
+<body>
+  <script>
+    var worker = new SharedWorker('./worker.js')
+    worker.port.start()
+    window.addEventListener('message', (ev) => {
+      console.log(ev)
+      worker.port.postMessage(ev.data)
+    })
+  </script>
+</body>
+</html>

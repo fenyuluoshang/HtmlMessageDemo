@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>聊天室</title>
+  </head>
+  <body>
+    <div class="title">
+      <span id="id"></span>
+    </div>
+    <div id="frame" class="frame"></div>
+    <div class="message">
+      <input id="message_input" />
+      <button id="send">发送</button>
+    </div>
+    <script>
+      const baseUrl = '.'
+      const worker = new SharedWorker(baseUrl + '/shared-worker.js')
+      let id
+      worker.port.addEventListener('message', (ev) => {
+        if (ev.data.cmd === 'connect') {
+          id = ev.data.data.id
+          document.getElementById('id').innerText = 'id:' + id
+        }
+        if (ev.data.cmd === 'message') {
+          const dom = document.createElement('div')
+          dom.className = 'message-item'
+          const name = document.createElement('span')
+          name.innerText = ev.data.data.id + ':'
+          dom.appendChild(name)
+          const message = document.createElement('div')
+          message.innerText = ev.data.data.message
+          dom.appendChild(message)
+          document.getElementById('frame').appendChild(dom)
+        }
+      })
+
+      document.getElementById('send').addEventListener('click', (ev) => {
+        const message = document.getElementById('message_input').value
+        document.getElementById('message_input').value = ''
+        worker.port.postMessage({
+          cmd: 'message',
+          data: {
+            id,
+            message,
+          },
+        })
+      })
+
+      worker.port.start()
+    </script>
+  </body>
+</html>

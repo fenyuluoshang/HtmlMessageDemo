@@ -1,0 +1,8 @@
+{
+  "name": "tab-message",
+  "version": "1.0.0",
+  "description": "跨页面通讯",
+  "main": "src/index.ts",
+  "author": "纷羽",
+  "license": "MIT"
+}
